@@ -87,6 +87,7 @@ export async function updateCounter(clerkNum: number, counterBody: {}) {
 			console.log(counterBody);
 			console.log(data.body);
 		});
+		console.log(response);
 	} catch (err) {
 		console.log(err);
 	}
