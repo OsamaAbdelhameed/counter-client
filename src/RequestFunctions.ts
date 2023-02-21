@@ -58,6 +58,8 @@ export async function handleTicket(
 				body: JSON.stringify(body),
 			}
 		).then((data) => {
+			console.log(data.body);
+			console.log(body);
 			if (!add && counters) {
 				updateCounter(clerkNum || 0, counterBody);
 			}
@@ -82,7 +84,8 @@ export async function updateCounter(clerkNum: number, counterBody: {}) {
 				body: JSON.stringify(counterBody),
 			}
 		).then((data) => {
-			console.log(data);
+			console.log(counterBody);
+			console.log(data.body);
 		});
 	} catch (err) {
 		console.log(err);
