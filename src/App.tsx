@@ -11,14 +11,14 @@ const App: React.FC = () => {
 	const [customers, setCustomers] = useState<Customer[]>([]);
 
 	async function fetchData() {
-		fetch("http://localhost:9090/counter/get")
+		fetch("https://fast-taiga-12450.herokuapp.com/counter/get")
 			.then((response) => response.json())
 			.then((data) => {
 				setCounters(data.Counters);
 			})
 			.catch((error) => console.error(error));
 
-		fetch("http://localhost:9090/customer/get")
+		fetch("https://fast-taiga-12450.herokuapp.com/customer/get")
 			.then((response) => response.json())
 			.then((data) => {
 				setCustomers(data.customers);
@@ -29,7 +29,7 @@ const App: React.FC = () => {
 	useEffect(() => {
 		fetchData();
 
-		const socket = new WebSocket("ws://localhost:8080");
+		const socket = new WebSocket("wss://fast-taiga-12450.herokuapp.com:8080");
 		socket.addEventListener("message", (event) => {
 			let newData = JSON.parse(event.data);
 			if (newData.ns.coll === "counters") {

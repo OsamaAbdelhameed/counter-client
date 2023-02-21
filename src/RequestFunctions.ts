@@ -48,13 +48,16 @@ export async function handleTicket(
 		customers[0] = { ...customers[0], ...body };
 		setCustomers([...customers]);
 
-		const response = await fetch("http://localhost:9090/customer/update/1", {
-			method: "PATCH",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(body),
-		}).then((data) => {
+		const response = await fetch(
+			"https://fast-taiga-12450.herokuapp.com/customer/update/1",
+			{
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(body),
+			}
+		).then((data) => {
 			if (!add && counters) {
 				updateCounter(clerkNum || 0, counterBody);
 			}
@@ -70,7 +73,7 @@ export async function handleTicket(
 export async function updateCounter(clerkNum: number, counterBody: {}) {
 	try {
 		const response = await fetch(
-			"http://localhost:9090/counter/update/" + clerkNum,
+			"https://fast-taiga-12450.herokuapp.com/counter/update/" + clerkNum,
 			{
 				method: "PATCH",
 				headers: {
