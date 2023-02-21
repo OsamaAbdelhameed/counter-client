@@ -60,8 +60,8 @@ export async function handleTicket(
 		).then((data) => {
 			console.log(data.body);
 			console.log(body);
-			if (!add && counters) {
-				updateCounter(clerkNum || 0, counterBody);
+			if (!add && counters && setCounters) {
+				updateCounter(clerkNum || 0, counterBody, counters, setCounters);
 			}
 			return data;
 		});
@@ -72,7 +72,12 @@ export async function handleTicket(
 	}
 }
 
-export async function updateCounter(clerkNum: number, counterBody: {}) {
+export async function updateCounter(
+	clerkNum: number,
+	counterBody: {},
+	counters: Counter[],
+	setCounters: (counters: Counter[]) => void
+) {
 	try {
 		const response = await fetch(
 			"https://fast-taiga-12450.herokuapp.com/counter/update/" + clerkNum,
@@ -85,9 +90,9 @@ export async function updateCounter(clerkNum: number, counterBody: {}) {
 			}
 		).then((data) => {
 			console.log(counterBody);
-			console.log(data.body);
+			counters[clerkNum - 1] = { ...counters[clerkNum - 1], ...counterBody };
+			setCounters([...counters]);
 		});
-		console.log("response");
 		console.log(response);
 	} catch (err) {
 		console.log(err);

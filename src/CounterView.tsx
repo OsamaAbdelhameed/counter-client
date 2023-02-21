@@ -35,19 +35,29 @@ const CounterView: React.FC<Props> = ({
 					</h3>
 					<button
 						onClick={() =>
-							updateCounter(num, {
-								online: !counters[num - 1].online,
-							})
+							updateCounter(
+								num,
+								{
+									online: !counters[num - 1].online,
+								},
+								counters,
+								setCounters
+							)
 						}
 					>
 						{counters[num - 1].online ? "Go Offline" : "Go Online"}
 					</button>
 					<button
 						onClick={() =>
-							updateCounter(num, {
-								...counters[num - 1],
-								status: false,
-							})
+							updateCounter(
+								num,
+								{
+									...counters[num - 1],
+									status: false,
+								},
+								counters,
+								setCounters
+							)
 						}
 						disabled={!counters[num - 1].status || !counters[num - 1].online}
 					>
