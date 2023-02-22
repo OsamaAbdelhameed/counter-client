@@ -29,7 +29,8 @@ const App: React.FC = () => {
 	useEffect(() => {
 		fetchData();
 
-		const socket = new WebSocket("wss://fast-taiga-12450.herokuapp.com");
+		const socket = new WebSocket("wss://fast-taiga-12450.herokuapp.com", "wss");
+		console.log(socket.url);
 		socket.addEventListener("message", (event) => {
 			let newData = JSON.parse(event.data);
 			if (newData.ns.coll === "counters") {
